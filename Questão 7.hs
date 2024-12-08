@@ -9,12 +9,12 @@
 
 -}
 
-inserirMedicamento :: Medicamento -> Horario -> PlanoMedicamento -> PlanoMedicamento
-inserirMedicamento med hor [] = [(hor, [med])]
-inserirMedicamento med hor ((h, meds):resto)
-    | hor == h = (h, med:meds) : resto
-    | hor < h = (hor, [med]) : (h, meds) : resto
-    | otherwise = (h, meds) : inserirMedicamento med hor resto
+inserirMedicamentoOrdenado :: (Horario, [Medicamento]) -> PlanoMedicamento -> PlanoMedicamento
+inserirMedicamentoOrdenado novo [] = [novo]
+inserirMedicamentoOrdenado novo@(hor, meds) ((h, m):resto)
+    | hor < h = novo : (h, m) : resto
+    | hor == h = (h, meds ++ m) : resto
+    | otherwise = (h, m) : inserirMedicamentoOrdenado novo resto
 
 converteReceituarioParaPlano :: Receituario -> PlanoMedicamento
 converteReceituarioParaPlano [] = []
@@ -23,9 +23,7 @@ converteReceituarioParaPlano ((med, horarios):resto) =
   where
     insereHorarios :: Medicamento -> [Horario] -> PlanoMedicamento -> PlanoMedicamento
     insereHorarios _ [] plano = plano
-    insereHorarios med (h:hs) plano = insereHorarios med hs (inserirMedicamento med h plano)
+    insereHorarios med (h:hs) plano = insereHorarios med hs (inserirMedicamentoOrdenado (h, [med]) plano)
 
 geraPlanoReceituario :: Receituario -> PlanoMedicamento
 geraPlanoReceituario receituario = converteReceituarioParaPlano receituario
-
--- Check 100%
