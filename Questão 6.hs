@@ -12,10 +12,6 @@
 
  -}
 plantaoValido :: Plantao -> Bool
-listaOrdenadaEDistinta :: Ord a => [a] -> Bool
-listaOrdenadaEDistinta [] = True
-listaOrdenadaEDistinta [_] = True
-listaOrdenadaEDistinta (x:y:xs) = x < y && listaOrdenadaEDistinta (y:xs)
 
 semCompraMedicarMesmoHorario :: [Cuidado] -> Bool
 semCompraMedicarMesmoHorario [] = True
@@ -41,4 +37,4 @@ horariosDistintosEOrdenados [_] = True
 horariosDistintosEOrdenados ((h1, cuidados1):(h2, cuidados2):resto) =
     h1 < h2 && horariosDistintosEOrdenados ((h2, cuidados2):resto)
 
--- Chech 100%
+-- Check 100%
