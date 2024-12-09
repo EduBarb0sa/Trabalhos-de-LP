@@ -22,3 +22,4 @@ inserirOrdenado novo@(med, qtd) ((m, q):resto)
   | med == m = (med, qtd + q) : resto 
   | otherwise = (m, q) : inserirOrdenado novo resto
 
+-- Check 100%

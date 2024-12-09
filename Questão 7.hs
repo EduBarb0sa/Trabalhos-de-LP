@@ -27,3 +27,5 @@ converteReceituarioParaPlano ((med, horarios):resto) =
 
 geraPlanoReceituario :: Receituario -> PlanoMedicamento
 geraPlanoReceituario receituario = converteReceituarioParaPlano receituario
+
+-- Check 100%

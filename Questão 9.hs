@@ -34,4 +34,4 @@ executaCuidados :: [Cuidado] -> EstoqueMedicamentos -> Maybe EstoqueMedicamentos
 executaCuidados [] estoque = Just estoque
 executaCuidados (c:cs) estoque = atualizaEstoque c estoque >>= executaCuidados cs
 
--- Chech 100%
+-- Check 100%
